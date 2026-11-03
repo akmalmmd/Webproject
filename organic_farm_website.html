@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Roots Organic Farm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farm-green': '#2c5e1a',
+                        'farm-light': '#f4f1ea',
+                        'farm-accent': '#d4a373',
+                        'farm-dark': '#3a3a3a'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap');
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-content {
+            display: none;
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .nav-link.active {
+            color: #d4a373;
+            border-bottom: 2px solid #d4a373;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-farm-light text-farm-dark font-sans flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-farm-green text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" onclick="showPage('home')" class="flex items-center gap-2">
+                        <i class="fas fa-leaf text-2xl text-farm-accent"></i>
+                        <span class="font-serif font-bold text-2xl tracking-tight">Green Roots Farm</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" onclick="showPage('home')" class="nav-link hover:text-farm-accent transition font-medium pb-1" data-target="home">Home</a>
+                    <a href="#" onclick="showPage('about')" class="nav-link hover:text-farm-accent transition font-medium pb-1" data-target="about">Our Story</a>
+                    <a href="#" onclick="showPage('boxes')" class="nav-link hover:text-farm-accent transition font-medium pb-1" data-target="boxes">Produce Boxes</a>
+                    <a href="#" onclick="showPage('farm')" class="nav-link hover:text-farm-accent transition font-medium pb-1" data-target="farm">The Farm</a>
+                    <a href="#" onclick="showPage('recipes')" class="nav-link hover:text-farm-accent transition font-medium pb-1" data-target="recipes">Recipes</a>
+                    <a href="#" onclick="showPage('contact')" class="nav-link hover:text-farm-accent transition font-medium pb-1" data-target="contact">Contact</a>
+                    <button onclick="showPage('boxes')" class="bg-farm-accent hover:bg-yellow-600 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg transform hover:-translate-y-0.5">Subscribe Now</button>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-farm-accent focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-farm-green border-t border-green-800 absolute w-full">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" onclick="showPage('home'); toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-800">Home</a>
+                <a href="#" onclick="showPage('about'); toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-800">Our Story</a>
+                <a href="#" onclick="showPage('boxes'); toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-800">Produce Boxes</a>
+                <a href="#" onclick="showPage('farm'); toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-800">The Farm</a>
+                <a href="#" onclick="showPage('recipes'); toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-800">Recipes</a>
+                <a href="#" onclick="showPage('contact'); toggleMenu()" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-green-800">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+        
+        <!-- 1. HOME PAGE -->
+        <div id="home" class="page-content active fade-in">
+            <!-- Hero Section -->
+            <div class="relative bg-black h-[600px] flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.pexels.com/photos/259280/pexels-photo-259280.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Fresh vegetables in a field" class="w-full h-full object-cover opacity-60">
+                </div>
+                <div class="relative z-10 text-center text-white px-4 max-w-4xl">
+                    <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 tracking-wide drop-shadow-lg">Fresh From Our Soil to Your Table</h1>
+                    <p class="text-xl md:text-2xl mb-10 text-gray-200 drop-shadow-md">Certified organic, seasonal produce delivered weekly to your doorstep.</p>
+                    <button onclick="showPage('boxes')" class="bg-farm-accent hover:bg-yellow-600 text-white px-8 py-4 rounded-full text-lg font-bold transition shadow-xl transform hover:-translate-y-1">View Subscription Plans</button>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="py-20 px-4 max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-serif text-4xl text-farm-green font-bold mb-4">Why Choose Green Roots?</h2>
+                    <div class="w-24 h-1 bg-farm-accent mx-auto"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="text-center">
+                        <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-farm-green">
+                            <i class="fas fa-seedling text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3 text-farm-dark">100% Organic</h3>
+                        <p class="text-gray-600">Grown without synthetic pesticides or fertilizers. Pure, natural goodness in every bite.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-farm-green">
+                            <i class="fas fa-truck text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3 text-farm-dark">Farm to Doorstep</h3>
+                        <p class="text-gray-600">Harvested fresh and delivered straight to you within 48 hours to ensure maximum freshness.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md text-farm-green">
+                            <i class="fas fa-hand-holding-heart text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3 text-farm-dark">Support Local</h3>
+                        <p class="text-gray-600">By subscribing, you're directly supporting sustainable agriculture and your local community.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fresh Produce Gallery -->
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="font-serif text-4xl text-farm-green font-bold mb-4">Our Vibrant Harvest</h2>
+                        <div class="w-24 h-1 bg-farm-accent mx-auto mb-4"></div>
+                        <p class="text-gray-600">Real, freshly picked organic fruits and vegetables from our fields to you.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <img src="https://images.pexels.com/photos/143133/pexels-photo-143133.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fresh Carrots" class="w-full h-56 object-cover rounded-xl shadow-md hover:scale-105 transition duration-300">
+                        <img src="https://images.pexels.com/photos/533280/pexels-photo-533280.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fresh Tomatoes" class="w-full h-56 object-cover rounded-xl shadow-md hover:scale-105 transition duration-300">
+                        <img src="https://images.pexels.com/photos/1350197/pexels-photo-1350197.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Leafy Greens" class="w-full h-56 object-cover rounded-xl shadow-md hover:scale-105 transition duration-300">
+                        <img src="https://images.pexels.com/photos/206959/pexels-photo-206959.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fresh Apples" class="w-full h-56 object-cover rounded-xl shadow-md hover:scale-105 transition duration-300">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Boxes Preview -->
+            <div class="bg-white py-20 px-4">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex justify-between items-end mb-12">
+                        <div>
+                            <h2 class="font-serif text-4xl text-farm-green font-bold mb-2">Weekly Harvest Boxes</h2>
+                            <p class="text-gray-600 text-lg">Curated selections based on the season's best.</p>
+                        </div>
+                        <button onclick="showPage('boxes')" class="hidden md:block text-farm-green font-bold hover:text-farm-accent transition">See All Plans &rarr;</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Box 1 -->
+                        <div class="bg-farm-light rounded-2xl overflow-hidden shadow-lg border border-gray-100 transition transform hover:-translate-y-2">
+                            <img src="https://images.pexels.com/photos/1453713/pexels-photo-1453713.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mixed Veggie Box" class="w-full h-64 object-cover">
+                            <div class="p-8">
+                                <h3 class="font-serif text-2xl font-bold text-farm-green mb-2">The Essential Veggie</h3>
+                                <p class="text-farm-accent font-bold text-xl mb-4">$35 <span class="text-sm text-gray-500 font-normal">/ week</span></p>
+                                <p class="text-gray-600 mb-6">Perfect for couples. A seasonal mix of 8-10 fresh vegetables, leafy greens, and root crops.</p>
+                                <button onclick="showPage('boxes')" class="w-full border-2 border-farm-green text-farm-green hover:bg-farm-green hover:text-white py-3 rounded-xl font-bold transition">Learn More</button>
+                            </div>
+                        </div>
+                        <!-- Box 2 -->
+                        <div class="bg-farm-green rounded-2xl overflow-hidden shadow-xl transform scale-105 relative z-10">
+                            <div class="absolute top-0 right-0 bg-farm-accent text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                            <img src="https://images.pexels.com/photos/2255974/pexels-photo-2255974.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Family Box" class="w-full h-64 object-cover">
+                            <div class="p-8 text-white">
+                                <h3 class="font-serif text-2xl font-bold mb-2">The Family Harvest</h3>
+                                <p class="text-farm-accent font-bold text-xl mb-4">$55 <span class="text-sm text-gray-300 font-normal">/ week</span></p>
+                                <p class="text-gray-200 mb-6">Ideal for a family of 4. A bountiful selection of 12-15 seasonal vegetables and seasonal fruits.</p>
+                                <button onclick="showPage('boxes')" class="w-full bg-farm-accent hover:bg-yellow-600 text-white py-3 rounded-xl font-bold transition">Learn More</button>
+                            </div>
+                        </div>
+                         <!-- Box 3 -->
+                         <div class="bg-farm-light rounded-2xl overflow-hidden shadow-lg border border-gray-100 transition transform hover:-translate-y-2">
+                            <img src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fruit Box" class="w-full h-64 object-cover">
+                            <div class="p-8">
+                                <h3 class="font-serif text-2xl font-bold text-farm-green mb-2">The Orchard Box</h3>
+                                <p class="text-farm-accent font-bold text-xl mb-4">$45 <span class="text-sm text-gray-500 font-normal">/ week</span></p>
+                                <p class="text-gray-600 mb-6">For fruit lovers. A sweet mix of apples, berries, stone fruits, and citrus depending on the season.</p>
+                                <button onclick="showPage('boxes')" class="w-full border-2 border-farm-green text-farm-green hover:bg-farm-green hover:text-white py-3 rounded-xl font-bold transition">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. ABOUT PAGE -->
+        <div id="about" class="page-content fade-in">
+            <!-- Header -->
+            <div class="bg-farm-green text-white py-20 px-4 text-center">
+                <h1 class="font-serif text-5xl font-bold mb-4">Our Story</h1>
+                <p class="text-xl max-w-2xl mx-auto text-gray-200">Cultivating community and healthy living since 2010.</p>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 py-20">
+                <!-- Content Block 1 -->
+                <div class="flex flex-col md:flex-row gap-12 items-center mb-24">
+                    <div class="w-full md:w-1/2">
+                        <img src="https://images.pexels.com/photos/2255928/pexels-photo-2255928.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Founders in field" class="rounded-2xl shadow-xl w-full h-[500px] object-cover">
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <h2 class="font-serif text-3xl text-farm-green font-bold">Rooted in Tradition</h2>
+                        <p class="text-gray-700 leading-relaxed text-lg">Green Roots Farm started with a simple belief: food should be grown with respect for the earth and the people who eat it. What began as a small one-acre plot tended by founders Sarah and David has blossomed into a thriving 50-acre organic farm.</p>
+                        <p class="text-gray-700 leading-relaxed text-lg">We left our corporate jobs in the city, seeking a deeper connection to nature and a healthier lifestyle for our growing family. That passion translates into every carrot pulled and every tomato picked.</p>
+                    </div>
+                </div>
+
+                <!-- Content Block 2 -->
+                <div class="flex flex-col md:flex-row-reverse gap-12 items-center">
+                    <div class="w-full md:w-1/2">
+                        <img src="https://images.pexels.com/photos/1192043/pexels-photo-1192043.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Soil and hands" class="rounded-2xl shadow-xl w-full h-[500px] object-cover">
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <h2 class="font-serif text-3xl text-farm-green font-bold">Our Philosophy</h2>
+                        <p class="text-gray-700 leading-relaxed text-lg">We practice regenerative agriculture. This means we go beyond just "sustainable" – we actively work to improve soil health, increase biodiversity, and enhance the ecosystem of our farm.</p>
+                        <ul class="space-y-4 mt-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-farm-accent mt-1 mr-3"></i>
+                                <span class="text-gray-700"><strong>No Synthetic Chemicals:</strong> We use natural compost and beneficial insects.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-farm-accent mt-1 mr-3"></i>
+                                <span class="text-gray-700"><strong>Crop Rotation:</strong> Keeping the soil rich in nutrients year after year.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-farm-accent mt-1 mr-3"></i>
+                                <span class="text-gray-700"><strong>Water Conservation:</strong> Utilizing smart drip irrigation systems.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. PRODUCE BOXES PAGE -->
+        <div id="boxes" class="page-content fade-in">
+            <div class="bg-white py-20 px-4 border-b">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="font-serif text-5xl text-farm-green font-bold mb-6">Choose Your Subscription</h1>
+                    <p class="text-xl text-gray-600 mb-8">Select the box that fits your household. Modify, pause, or cancel your subscription at any time.</p>
+                    
+                    <!-- How it works -->
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-8 mt-12 bg-farm-light p-8 rounded-2xl">
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3 text-farm-accent font-bold text-xl shadow">1</div>
+                            <p class="font-bold">Choose a Box</p>
+                        </div>
+                        <i class="fas fa-arrow-right hidden md:block text-gray-400"></i>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3 text-farm-accent font-bold text-xl shadow">2</div>
+                            <p class="font-bold">We Harvest</p>
+                        </div>
+                        <i class="fas fa-arrow-right hidden md:block text-gray-400"></i>
+                        <div class="text-center">
+                            <div class="bg-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3 text-farm-accent font-bold text-xl shadow">3</div>
+                            <p class="font-bold">Weekly Delivery</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing Table -->
+            <div class="py-20 px-4 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Box 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.pexels.com/photos/1453713/pexels-photo-1453713.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Essential Box" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h3 class="font-serif text-2xl font-bold text-farm-green mb-2">The Essential Veggie</h3>
+                            <p class="text-farm-accent font-bold text-3xl mb-6">$35<span class="text-lg text-gray-500 font-normal">/wk</span></p>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center text-gray-600"><i class="fas fa-leaf text-green-500 mr-2"></i> 8-10 seasonal vegetables</li>
+                                <li class="flex items-center text-gray-600"><i class="fas fa-leaf text-green-500 mr-2"></i> Good for 1-2 people</li>
+                                <li class="flex items-center text-gray-600"><i class="fas fa-leaf text-green-500 mr-2"></i> Includes recipe cards</li>
+                                <li class="flex items-center text-gray-600"><i class="fas fa-leaf text-green-500 mr-2"></i> Free doorstep delivery</li>
+                            </ul>
+                            <button onclick="openModal('Essential Veggie Box', 35)" class="w-full bg-white border-2 border-farm-green text-farm-green hover:bg-farm-green hover:text-white py-3 rounded-xl font-bold transition">Select Plan</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Box 2 -->
+                    <div class="bg-farm-green text-white rounded-2xl overflow-hidden shadow-2xl flex flex-col transform md:-translate-y-4 relative border-4 border-farm-accent">
+                        <div class="absolute top-4 right-4 bg-farm-accent text-white text-xs font-bold px-3 py-1 rounded-full">BEST VALUE</div>
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.pexels.com/photos/2255974/pexels-photo-2255974.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Family Box" class="w-full h-full object-cover opacity-90">
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h3 class="font-serif text-2xl font-bold mb-2">The Family Harvest</h3>
+                            <p class="text-farm-accent font-bold text-3xl mb-6">$55<span class="text-lg text-gray-300 font-normal">/wk</span></p>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center text-gray-200"><i class="fas fa-check text-farm-accent mr-2"></i> 12-15 seasonal veg & fruit</li>
+                                <li class="flex items-center text-gray-200"><i class="fas fa-check text-farm-accent mr-2"></i> Good for 3-5 people</li>
+                                <li class="flex items-center text-gray-200"><i class="fas fa-check text-farm-accent mr-2"></i> Premium recipe booklet</li>
+                                <li class="flex items-center text-gray-200"><i class="fas fa-check text-farm-accent mr-2"></i> Priority delivery window</li>
+                                <li class="flex items-center text-gray-200"><i class="fas fa-check text-farm-accent mr-2"></i> Monthly farm treat</li>
+                            </ul>
+                            <button onclick="openModal('Family Harvest Box', 55)" class="w-full bg-farm-accent hover:bg-yellow-600 text-white py-3 rounded-xl font-bold transition shadow-lg">Select Plan</button>
+                        </div>
+                    </div>
+
+                    <!-- Box 3 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fruit Box" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <h3 class="font-serif text-2xl font-bold text-farm-green mb-2">The Orchard Box</h3>
+                            <p class="text-farm-accent font-bold text-3xl mb-6">$45<span class="text-lg text-gray-500 font-normal">/wk</span></p>
+                            <ul class="space-y-3 mb-8 flex-grow">
+                                <li class="flex items-center text-gray-600"><i class="fas fa-apple-alt text-red-500 mr-2"></i> 100% Seasonal Fruits</li>
+                                <li class="flex items-center text-gray-600"><i class="fas fa-apple-alt text-red-500 mr-2"></i> Berries, apples, citrus</li>
+                                <li class="flex items-center text-gray-600"><i class="fas fa-apple-alt text-red-500 mr-2"></i> Great for snacking</li>
+                                <li class="flex items-center text-gray-600"><i class="fas fa-apple-alt text-red-500 mr-2"></i> Free doorstep delivery</li>
+                            </ul>
+                            <button onclick="openModal('Orchard Box', 45)" class="w-full bg-white border-2 border-farm-green text-farm-green hover:bg-farm-green hover:text-white py-3 rounded-xl font-bold transition">Select Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. THE FARM PAGE -->
+        <div id="farm" class="page-content fade-in">
+            <div class="py-20 px-4 max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h1 class="font-serif text-5xl text-farm-green font-bold mb-4">Life on the Farm</h1>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Take a glimpse into our daily operations and where your food comes from.</p>
+                </div>
+                
+                <!-- Gallery Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="relative group overflow-hidden rounded-xl h-64">
+                        <img src="https://images.pexels.com/photos/2886937/pexels-photo-2886937.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Greenhouse" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <span class="text-white font-bold text-xl">Our Greenhouses</span>
+                        </div>
+                    </div>
+                    <div class="relative group overflow-hidden rounded-xl h-64">
+                        <img src="https://images.pexels.com/photos/1753896/pexels-photo-1753896.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Harvesting" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <span class="text-white font-bold text-xl">Morning Harvest</span>
+                        </div>
+                    </div>
+                    <div class="relative group overflow-hidden rounded-xl h-64">
+                        <img src="https://images.pexels.com/photos/2933243/pexels-photo-2933243.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Tractor" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <span class="text-white font-bold text-xl">Field Work</span>
+                        </div>
+                    </div>
+                    <div class="relative group overflow-hidden rounded-xl h-64">
+                        <img src="https://images.pexels.com/photos/1268101/pexels-photo-1268101.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Carrots" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <span class="text-white font-bold text-xl">Fresh Pulls</span>
+                        </div>
+                    </div>
+                    <div class="relative group overflow-hidden rounded-xl h-64 sm:col-span-2 md:col-span-2">
+                        <img src="https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Farm aerial" class="w-full h-full object-cover transition duration-500 transform group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                            <span class="text-white font-bold text-xl">The 50-Acre Plot</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farm Practices -->
+                <div class="mt-20 bg-white p-10 rounded-2xl shadow-sm border border-gray-100">
+                    <h2 class="font-serif text-3xl text-farm-green font-bold mb-6">Our Growing Standards</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2"><i class="fas fa-sun text-farm-accent mr-2"></i>Soil Health First</h4>
+                            <p class="text-gray-600">Healthy plants start with healthy soil. We use cover crops and minimal tilling to keep the microbiology of our soil thriving.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-2"><i class="fas fa-bug text-farm-accent mr-2"></i>Pest Management</h4>
+                            <p class="text-gray-600">We rely on beneficial insects, crop rotation, and physical barriers rather than harmful chemical sprays to manage pests.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- More Real Produce Images on Farm Page -->
+                <div class="mt-20">
+                    <h2 class="font-serif text-3xl text-farm-green font-bold mb-8 text-center">Fresh From the Fields</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <img src="https://images.pexels.com/photos/70746/strawberries-red-fruit-royalty-free-70746.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Organic Strawberries" class="w-full h-40 object-cover rounded-lg shadow hover:opacity-90 transition">
+                        <img src="https://images.pexels.com/photos/251889/pexels-photo-251889.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Fresh Cabbage" class="w-full h-40 object-cover rounded-lg shadow hover:opacity-90 transition">
+                        <img src="https://images.pexels.com/photos/4197444/pexels-photo-4197444.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Onions" class="w-full h-40 object-cover rounded-lg shadow hover:opacity-90 transition">
+                        <img src="https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Mangoes" class="w-full h-40 object-cover rounded-lg shadow hover:opacity-90 transition">
+                        <img src="https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Bananas" class="w-full h-40 object-cover rounded-lg shadow hover:opacity-90 transition">
+                        <img src="https://images.pexels.com/photos/1414115/pexels-photo-1414115.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Organic Lemons" class="w-full h-40 object-cover rounded-lg shadow hover:opacity-90 transition">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 5. RECIPES PAGE -->
+        <div id="recipes" class="page-content fade-in">
+            <div class="bg-farm-light py-20 px-4">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h1 class="font-serif text-5xl text-farm-green font-bold mb-4">Farm-Fresh Recipes</h1>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Inspiration for your weekly produce box.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Recipe 1 -->
+                        <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                            <img src="https://images.pexels.com/photos/105451/pexels-photo-105451.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Salad" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <span class="text-xs font-bold text-farm-accent uppercase tracking-wider">Summer Box</span>
+                                <h3 class="font-serif text-xl font-bold mt-2 mb-2">Heirloom Tomato & Basil Salad</h3>
+                                <p class="text-gray-600 text-sm mb-4">A simple, refreshing salad that lets the ingredients shine.</p>
+                                <a href="#" class="text-farm-green font-bold hover:underline">Read Recipe &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Recipe 2 -->
+                        <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                            <img src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Soup" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <span class="text-xs font-bold text-farm-accent uppercase tracking-wider">Autumn Box</span>
+                                <h3 class="font-serif text-xl font-bold mt-2 mb-2">Roasted Butternut Squash Soup</h3>
+                                <p class="text-gray-600 text-sm mb-4">Creamy, comforting, and perfect for chilly evenings.</p>
+                                <a href="#" class="text-farm-green font-bold hover:underline">Read Recipe &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Recipe 3 -->
+                        <div class="bg-white rounded-xl overflow-hidden shadow-md">
+                            <img src="https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Salad" class="w-full h-56 object-cover">
+                            <div class="p-6">
+                                <span class="text-xs font-bold text-farm-accent uppercase tracking-wider">Spring Box</span>
+                                <h3 class="font-serif text-xl font-bold mt-2 mb-2">Crispy Kale & Walnut Salad</h3>
+                                <p class="text-gray-600 text-sm mb-4">A nutritious bowl packed with crunch and a tangy lemon dressing.</p>
+                                <a href="#" class="text-farm-green font-bold hover:underline">Read Recipe &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. CONTACT PAGE -->
+        <div id="contact" class="page-content fade-in">
+            <div class="py-20 px-4 max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h1 class="font-serif text-5xl text-farm-green font-bold mb-4">Get in Touch</h1>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Have questions about our subscriptions or farm practices? We'd love to hear from you.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12 bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <!-- Contact Info -->
+                    <div class="w-full lg:w-1/3 bg-farm-green text-white p-10">
+                        <h3 class="font-serif text-2xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt mt-1.5 mr-4 text-farm-accent text-xl"></i>
+                                <div>
+                                    <h4 class="font-bold">Farm Address</h4>
+                                    <p class="text-gray-300">123 Valley Road<br>Farmingville, NY 12345</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt mt-1.5 mr-4 text-farm-accent text-xl"></i>
+                                <div>
+                                    <h4 class="font-bold">Phone</h4>
+                                    <p class="text-gray-300">(555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope mt-1.5 mr-4 text-farm-accent text-xl"></i>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p class="text-gray-300">hello@greenrootsfarm.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-12">
+                            <h4 class="font-bold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-white hover:text-farm-accent text-2xl transition"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="text-white hover:text-farm-accent text-2xl transition"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="text-white hover:text-farm-accent text-2xl transition"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="w-full lg:w-2/3 p-10">
+                        <form onsubmit="handleContact(event)">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="firstName">First Name</label>
+                                    <input class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-farm-green" id="firstName" type="text" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="lastName">Last Name</label>
+                                    <input class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-farm-green" id="lastName" type="text" required>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email Address</label>
+                                <input class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-farm-green" id="email" type="email" required>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="message">Message</label>
+                                <textarea class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-farm-green h-32" id="message" required></textarea>
+                            </div>
+                            <button type="submit" class="bg-farm-green hover:bg-green-800 text-white font-bold py-3 px-8 rounded-xl transition w-full md:w-auto">Send Message</button>
+                        </form>
+                        <!-- Form Success Message (Hidden) -->
+                        <div id="form-success" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                            Thank you for your message! We will get back to you soon.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-farm-dark text-gray-300 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-1">
+                <a href="#" class="flex items-center gap-2 mb-4">
+                    <i class="fas fa-leaf text-2xl text-farm-accent"></i>
+                    <span class="font-serif font-bold text-xl text-white">Green Roots</span>
+                </a>
+                <p class="text-sm">Bringing the freshest, organic produce straight from our fields to your family's table.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" onclick="showPage('about')" class="hover:text-farm-accent">Our Story</a></li>
+                    <li><a href="#" onclick="showPage('boxes')" class="hover:text-farm-accent">Subscriptions</a></li>
+                    <li><a href="#" onclick="showPage('recipes')" class="hover:text-farm-accent">Recipes</a></li>
+                    <li><a href="#" onclick="showPage('contact')" class="hover:text-farm-accent">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-farm-accent">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-farm-accent">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-farm-accent">Delivery Areas</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Newsletter</h4>
+                <p class="text-sm mb-2">Subscribe for farm updates and recipes.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Email address" class="px-3 py-2 w-full text-black rounded-l-md focus:outline-none">
+                    <button class="bg-farm-accent text-white px-3 py-2 rounded-r-md hover:bg-yellow-600 transition">Go</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-gray-700 text-sm text-center">
+            &copy; <span id="year"></span> Green Roots Organic Farm. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Subscription Modal -->
+    <div id="subscriptionModal" class="fixed inset-0 z-[100] hidden bg-black bg-opacity-50 flex items-center justify-center px-4">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 focus:outline-none">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h2 class="font-serif text-2xl font-bold text-farm-green mb-2">Subscribe to Box</h2>
+            <p id="modalBoxName" class="text-lg font-semibold text-gray-700 mb-1"></p>
+            <p id="modalBoxPrice" class="text-farm-accent font-bold mb-6"></p>
+            
+            <form id="subscribeForm" onsubmit="handleSubscribe(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Delivery Address</label>
+                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-farm-green" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Payment Details (Mock)</label>
+                    <input type="text" placeholder="Card Number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-farm-green mb-2" required>
+                </div>
+                <button type="submit" class="w-full bg-farm-accent hover:bg-yellow-600 text-white font-bold py-3 rounded-xl transition">Confirm Subscription</button>
+            </form>
+            
+            <!-- Success Message in Modal -->
+            <div id="modalSuccess" class="hidden text-center py-8">
+                <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Subscription Confirmed!</h3>
+                <p class="text-gray-600">Welcome to the Green Roots family. Your first box will arrive soon.</p>
+                <button onclick="closeModal()" class="mt-6 border-2 border-farm-green text-farm-green px-6 py-2 rounded-xl font-bold hover:bg-farm-green hover:text-white transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Page Navigation Logic
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show target page
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo(0, 0); // Scroll to top
+            }
+
+            // Update active state in desktop nav
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('data-target') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize Home as active nav
+        document.querySelector('.nav-link[data-target="home"]').classList.add('active');
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', toggleMenu);
+
+        function toggleMenu() {
+            menu.classList.toggle('hidden');
+        }
+
+        // Contact Form Handler
+        function handleContact(e) {
+            e.preventDefault();
+            const form = e.target;
+            form.style.display = 'none';
+            document.getElementById('form-success').classList.remove('hidden');
+            document.getElementById('form-success').classList.add('block');
+            
+            // Reset after 3 seconds for demo purposes
+            setTimeout(() => {
+                form.reset();
+                form.style.display = 'block';
+                document.getElementById('form-success').classList.add('hidden');
+                document.getElementById('form-success').classList.remove('block');
+            }, 3000);
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('subscriptionModal');
+        const subscribeForm = document.getElementById('subscribeForm');
+        const modalSuccess = document.getElementById('modalSuccess');
+
+        function openModal(boxName, price) {
+            document.getElementById('modalBoxName').textContent = boxName;
+            document.getElementById('modalBoxPrice').textContent = `$${price} / week`;
+            subscribeForm.style.display = 'block';
+            modalSuccess.classList.add('hidden');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            subscribeForm.reset();
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            subscribeForm.style.display = 'none';
+            modalSuccess.classList.remove('hidden');
+        }
+
+        // Close modal if clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+    </script>
+</body>
+</html>
